@@ -255,6 +255,7 @@ const WORKS = [
   {title:'Gatekeeper',      tag:'Python',        url:''},
 ];
 
+
 const $ = id => document.getElementById(id);
 const root = document.documentElement, rail = $('rail'), stage = $('stage');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -361,11 +362,11 @@ stage.addEventListener('wheel', e => {
 }, {passive:false});
 
 /* drag / swipe */
-let sx = 0, sp = 0, lx = 0, lt = 0, v = 0, moved = 0;
+let sx = 0, sp = 0, lx = 0, lt = 0, v = 0, moved = 0, pid = null;
 stage.addEventListener('pointerdown', e => {
   if (e.button !== 0) return;
   dragging = true; moved = 0; sx = lx = e.clientX; sp = pos; lt = performance.now(); v = 0;
-  stage.setPointerCapture(e.pointerId); stage.classList.add('drag'); kick();
+  pid = e.pointerId; kick();
 });
 stage.addEventListener('pointermove', e => {
   const r = e.target.closest?.('.card.center');
@@ -373,11 +374,13 @@ stage.addEventListener('pointermove', e => {
   if (!dragging) return;
   const step = cards[0].offsetWidth * .78, now = performance.now();
   moved = Math.max(moved, Math.abs(e.clientX - sx));
+  if (moved > 6 && pid !== null && !stage.hasPointerCapture(pid)) { stage.setPointerCapture(pid); stage.classList.add('drag'); }
   pos = clamp(sp - (e.clientX - sx) / step, -.35, N - .65);
   v = (lx - e.clientX) / step / Math.max(1, now - lt) * 16; lx = e.clientX; lt = now;
 });
 const end = () => { if (!dragging) return; dragging = false; stage.classList.remove('drag'); vel = 0; go(pos + clamp(v * 6, -2, 2)); };
 stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
+rail.addEventListener('dragstart', e => e.preventDefault());
 rail.addEventListener('click', e => {
   const c = e.target.closest('.card'); if (!c) return;
   const i = +c.dataset.i;
