@@ -247,11 +247,11 @@ footer{display:flex;align-items:center;gap:18px;padding:0 max(4vw,18px) clamp(18
           Empty url = card is not clickable yet.                                          */
 const PHOTO = 'me.jpg';
 const WORKS = [
-  {title:'PORTOKO',         tag:'Brand & site',  url:'https://portoko.com'},
+  {title:'PORTOKO',         tag:'Main Comp',  url:'https://portoko.com'},
   {title:'Relic ASCII (sample)',   tag:'Sample', url:'https://micihn.github.io/ascii-gamelike-porto/'},
   {title:'Portoko Experiment Design',         tag:'Showoff',      url:'https://micihn.github.io/portoko-showoff-v1/'},
-  {title:'Process Catalog', tag:'Product',       url:''},
-  {title:'Odoo 18 for RKB', tag:'ERP',           url:''},
+  {title:'Quarry Lane Demo', tag:'Sample',       url:'https://micihn.github.io/Quarry-Lane-Demo/'},
+  {title:'Fenwick Daughter Demo', tag:'Sample',           url:'https://micihn.github.io/Fenwick-Daughter-Demo/'},
   {title:'Gatekeeper',      tag:'Python',        url:''},
 ];
 
@@ -305,7 +305,7 @@ const works = WORKS.map((w, k) => {
   return `${open} data-i="${i}" aria-label="${esc(w.title)}${link ? ', opens ' + esc(host(w.url)) : ''}">
     <div class="shot">${gen(w, k)}${src ? `<img src="${esc(src)}" alt="" loading="lazy" draggable="false" onerror="this.remove()" onload="if(this.naturalWidth<420)this.remove()">` : ''}</div>
     <span class="open" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    <div class="meta"><strong>${esc(w.title)}</strong><small>${esc(link ? host(w.url) : w.tag)}</small></div>${link ? '</a>' : '</div>'}`;
+    <div class="meta"><strong>${esc(w.title)}</strong><small>${esc(w.tag || host(w.url))}</small></div>${link ? '</a>' : '</div>'}`;
 }).join('');
 rail.innerHTML = photo + hint + works;
 const cards = [...rail.children], N = cards.length;
