@@ -22,7 +22,7 @@ LAYOUT: name top-left, socials + theme switch top-right, rail fills the rest, co
   --track:#0b0b0b;--cut:#fff;--mod:#fff;
   --glass:rgba(255,255,255,.46);--glass2:rgba(255,255,255,.14);--rim:rgba(255,255,255,.95);
   --shadow:rgba(10,10,30,.2);--mesh:.42;--grain:.12;
-  --cw:clamp(220px,min(30vw,40svh),390px)}
+  --cw:clamp(200px,min(28vw,34svh),370px)}
 :root[data-theme=dark]{color-scheme:dark;
   --bg:#000;--ink:#fff;--mute:#9a9a9a;--line:rgba(255,255,255,.14);
   --track:#ececec;--cut:#000;--mod:#151515;
@@ -49,9 +49,9 @@ button{font:inherit}
   animation:grain .9s steps(5) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}}
 
-.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;isolation:isolate}
+.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:auto auto 1fr auto;overflow:hidden;isolation:isolate}
 header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:clamp(20px,3.4vw,48px) max(4vw,18px) 0;position:relative;z-index:5}
-h1{margin:0;font-weight:900;font-size:clamp(46px,9.4vw,148px);line-height:.86;letter-spacing:-.055em}
+h1{margin:0;font-weight:900;font-size:clamp(44px,min(9.4vw,14svh),148px);line-height:.86;letter-spacing:-.055em}
 h1 span{display:block;overflow:hidden;padding-bottom:.04em}
 h1 span b{display:inline-block;font-weight:inherit;animation:rise 1s cubic-bezier(.2,.9,.1,1) both}
 h1 span:nth-child(2) b{animation-delay:.09s}
@@ -77,13 +77,13 @@ h1:hover b{text-shadow:-2px 0 rgba(230,0,18,.6),2px 0 rgba(0,71,187,.6)}
 a:focus-visible,button:focus-visible,.stage:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 
 /* stage + kit parts */
-.stage{position:relative;perspective:1400px;perspective-origin:50% 45%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;min-height:min(58svh,580px);outline:none}
+.stage{position:relative;perspective:1400px;perspective-origin:50% 45%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;min-height:min(50svh,520px);outline:none}
 .stage.drag{cursor:grabbing}
 .kit{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .par{position:absolute;transform:translate3d(calc(var(--px,0) * var(--z,10px)),calc(var(--py,0) * var(--z,10px)),0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 .par>*{display:block;width:100%;height:auto;animation:float var(--d,7s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
 @keyframes float{from{transform:translate3d(0,-7px,0) rotate(var(--r0,-2deg))}to{transform:translate3d(0,9px,0) rotate(var(--r1,2deg))}}
-.frame{left:50%;top:50%;--fw:min(1060px,96vw,calc(min(58svh,580px) * 1.95));width:var(--fw);margin-left:calc(var(--fw) / -2);translate:0 -53%;--z:-14px}
+.frame{left:50%;top:50%;--fw:min(1060px,96vw,calc(min(50svh,520px) * 2.05));width:var(--fw);margin-left:calc(var(--fw) / -2);translate:0 -53%;--z:-14px}
 .frame>svg{animation:none}
 .k-thr{width:clamp(96px,11vw,170px);right:8%;top:2%;--z:26px;--d:6s}
 .k-plate{width:clamp(110px,13vw,200px);left:5%;top:6%;--z:20px;--d:8s;--r0:-6deg;--r1:-1deg}
@@ -104,9 +104,13 @@ a:focus-visible,button:focus-visible,.stage:focus-visible{outline:2px solid var(
 .card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:radial-gradient(420px circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.55),transparent 42%),linear-gradient(115deg,rgba(255,255,255,.35) 0 18%,transparent 34%);mix-blend-mode:soft-light}
 .shot{position:relative;flex:1;border-radius:20px;overflow:hidden;background:#111;transform:translateZ(0)}
+.shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;background:#000;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.card.center:hover .shot video{transform:scale(1.045)}
+.badge{position:absolute;left:22px;top:22px;z-index:2;display:flex;align-items:center;gap:6px;padding:5px 10px 5px 8px;border-radius:99px;font-size:13px;font-weight:600;color:#fff;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--c)}
 .shot img{position:relative;width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s}
 .meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:0 6px 4px}
-.meta strong{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta strong{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .meta small{font-size:13px;color:var(--mute);white-space:nowrap}
 .open{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;scale:.7;transition:opacity .3s,scale .3s;z-index:2}
 .card.center:hover .shot img{transform:scale(1.045);filter:drop-shadow(-3px 0 0 rgba(230,0,18,.6)) drop-shadow(3px 0 0 rgba(0,71,187,.6)) saturate(1.1)}
@@ -127,6 +131,35 @@ a:focus-visible,button:focus-visible,.stage:focus-visible{outline:2px solid var(
 .arrow{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
 @keyframes nudge{50%{transform:translateX(8px)}}
 
+/* filters + index */
+.filters{position:relative;z-index:6;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:clamp(18px,2.6vw,32px) max(4vw,18px) 0;animation:fade .8s .55s both}
+.chip{flex:none;height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 16px 0 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.chip:hover{border-color:var(--ink);transform:translateY(-1px)}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--c,var(--ink))}
+.chip small{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed=true] small{color:inherit;opacity:.65}
+.chip.view{margin-left:auto}
+.chip.view svg{width:16px;height:16px}
+.index{grid-row:3;grid-column:1;align-self:start;max-height:100%;position:relative;z-index:8;margin:18px max(4vw,18px);padding:clamp(18px,2.4vw,32px);border-radius:30px;overflow:auto;
+  background:linear-gradient(155deg,var(--glass),var(--glass2));backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);border:1px solid var(--rim);box-shadow:0 30px 60px -24px var(--shadow);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:28px 36px;align-content:start;
+  opacity:0;transform:translateY(24px) scale(.98);pointer-events:none;transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.1,1)}
+.index.on{opacity:1;transform:none;pointer-events:auto}
+.stage{grid-row:3;grid-column:1;transition:opacity .4s,filter .4s}
+.index.on~.stage{opacity:.15;filter:blur(6px)}
+.grp h2{margin:0 0 10px;display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.grp h2 i{width:12px;height:12px;border-radius:50%;background:var(--c)}
+.grp h2 small{font-size:14px;font-weight:600;color:var(--mute)}
+.grp ul{list-style:none;margin:0 0 0 5px;padding:0 0 0 18px;border-left:1.5px solid var(--line)}
+.grp li{position:relative;display:flex;align-items:center;gap:6px}
+.grp li::before{content:"";position:absolute;left:-18px;top:50%;width:12px;border-top:1.5px solid var(--line)}
+.grp li button{flex:1;min-height:44px;display:flex;align-items:baseline;gap:10px;padding:8px 10px;margin-left:-10px;border:0;border-radius:12px;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:16px;font-weight:600}
+.grp li button:hover{background:var(--glass)}
+.grp li button small{font-size:13px;font-weight:500;color:var(--mute)}
+.grp li a{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;color:var(--mute);transition:background .2s,color .2s}
+.grp li a:hover{background:var(--ink);color:var(--bg)}
+.vid{display:inline-block;width:0;height:0;border-left:7px solid var(--red);border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;margin-left:2px}
 footer{display:flex;align-items:center;gap:18px;padding:0 max(4vw,18px) clamp(18px,3vw,36px);font-size:14px;color:var(--mute);position:relative;z-index:5}
 .bar{flex:1;height:2px;background:var(--line);position:relative;overflow:hidden;border-radius:2px}
 .bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--red),var(--yel),var(--blue));transform-origin:left;transform:scaleX(0)}
@@ -139,7 +172,9 @@ footer{display:flex;align-items:center;gap:18px;padding:0 max(4vw,18px) clamp(18
 @media(max-width:600px){
   :root{--cw:min(66vw,300px)}
   header{flex-direction:column;gap:18px}.tools{justify-content:flex-start}
-  .now{display:none}.stage{min-height:56svh}
+  .now{display:none}.stage{min-height:52svh}
+  .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}.filters::-webkit-scrollbar{display:none}.chip.view{margin-left:0}
+  .index{margin:14px 12px}
   .card{backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%)}
   .k-plate{top:0;left:-4%}.k-thr{right:-2%;top:0}.k-fin{right:2%}.k-glass{display:none}
   .frame{--fw:150vw}
@@ -164,6 +199,9 @@ footer{display:flex;align-items:center;gap:18px;padding:0 max(4vw,18px) clamp(18
       <button class="theme" id="theme" aria-label="Switch light / dark" title="Light / dark"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></button>
     </div>
   </header>
+
+  <nav class="filters" id="filters" aria-label="Filter work"></nav>
+  <div class="index" id="index" aria-label="All work" aria-hidden="true"></div>
 
   <section class="stage" id="stage" tabindex="0" aria-roledescription="carousel" aria-label="Portfolio gallery">
     <div class="kit" id="kit" aria-hidden="true">
@@ -242,19 +280,36 @@ footer{display:flex;align-items:center;gap:18px;padding:0 max(4vw,18px) clamp(18
 <script>
 {
 /* ================= EDIT HERE =================
-   PHOTO: path or URL to your photo, e.g. 'me.jpg' (put the file next to index.html).
-   WORKS: `url` auto-makes a screenshot thumbnail; `thumb` overrides it with your own image.
-          Empty url = card is not clickable yet.                                          */
+   PHOTO  path or URL to your photo (file next to index.html).
+   CATS   categories: label + colour. Only categories that have work show up as filters.
+   WORKS  title  — card title (about 18 characters fit on one line, 2 lines max)
+          tag    — small label on the card
+          cat    — one of the CATS keys
+          url    — link (empty = not clickable yet). Also auto-makes a screenshot thumbnail.
+          thumb  — your own image instead of the screenshot (optional)
+          video  — mp4/webm that autoplays muted on loop (optional, wins over thumb)
+          year   — shown in the list view (optional)                                    */
 const PHOTO = 'me.jpg';
+const CATS = {
+  web:      {label:'Web design',   c:'#E60012'},
+  odoo:     {label:'Odoo modules', c:'#0047BB'},
+  creative: {label:'Creative',     c:'#FFC400'},
+  tool:     {label:'Tools',        c:'#8a8a8a'},
+};
 const WORKS = [
-  {title:'PORTOKO',         tag:'Main Comp',  url:'https://portoko.com'},
-  {title:'Relic ASCII (sample)',   tag:'Sample', url:'https://micihn.github.io/ascii-gamelike-porto/'},
-  {title:'Portoko Experiment Design',         tag:'Showoff',      url:'https://micihn.github.io/portoko-showoff-v1/'},
-  {title:'Quarry Lane Demo', tag:'Sample',       url:'https://micihn.github.io/Quarry-Lane-Demo/'},
-  {title:'Fenwick Daughter Demo', tag:'Sample',           url:'https://micihn.github.io/Fenwick-Daughter-Demo/'},
-  {title:'More is coming...',      tag:'',        url:''},
+  {title:'PORTOKO',           tag:'Brand & site',  cat:'web',  url:'https://portoko.com', year:2026},
+  {title:'Relic ASCII (sample)',           tag:'Sample',  cat:'creative',  url:'https://micihn.github.io/ascii-gamelike-porto/', year:2026},
+  {title:'Portoko Experiment Design',           tag:'Sample',  cat:'creative',  url:'https://micihn.github.io/portoko-showoff-v1/', year:2026},
+  {title:'Quarry Lane (sample)',           tag:'Sample',  cat:'creative',  url:'https://micihn.github.io/Quarry-Lane-Demo/', year:2026},
+  {title:'Fenwick Daughter (sample)',           tag:'Sample',  cat:'creative',  url:'https://micihn.github.io/Fenwick-Daughter-Demo/', year:2026},
+  {title:'Odoo CE Barcode Module', tag:'Odoo',       cat:'odoo', url:'', video:'https://www.youtube.com/watch?v=iWs4ci_A7wg', year:2026},
+  {title:'Odoo Advance Forecasting Module',   tag:'Odoo',       cat:'odoo', url:'https://www.youtube.com/watch?v=xDdeq0exgyw', video:'', year:2026},
+  {title:'Odoo CE Adv Financial Report Engine',   tag:'Odoo',   cat:'odoo', url:'', year:2026},
+  {title:'Tiny Dopamine',     tag:'Web sound kit', cat:'tool', url:'', year:2026},
+  {title:'Chat2MD',           tag:'Web tool',      cat:'tool', url:'', year:2026},
+  {title:'Process Catalog',   tag:'Product',       cat:'tool', url:'', year:2026},
+  {title:'Gatekeeper',        tag:'Python',        cat:'tool', url:'', year:2026},
 ];
-
 
 const $ = id => document.getElementById(id);
 const root = document.documentElement, rail = $('rail'), stage = $('stage');
@@ -289,30 +344,75 @@ const gen = (w, i) => {
     <path d="M150 230h120M150 242h90" stroke="#fff" stroke-width="3" opacity=".7"/>
   </svg><span>${esc(w.title)}</span></div>`;
 };
-const photo = `<div class="card photo" data-i="0"><div class="shot">${
+const photo = `<div class="card photo"><div class="shot">${
   PHOTO ? `<img src="${esc(PHOTO)}" alt="Michael Chen" draggable="false">`
   : `<div class="mono"><svg viewBox="0 0 200 200" aria-label="MC"><path d="M30 20H120L150 50V96L120 120H30Z" fill="#0047BB"/><circle cx="140" cy="128" r="40" fill="#141414" stroke="#E60012" stroke-width="10"/><circle cx="140" cy="128" r="14" fill="#FFC400"/><path d="M22 186 74 104 96 140 64 186Z" fill="#FFC400"/><text x="38" y="88" fill="#fff" font-family="Inter Tight" font-weight="900" font-size="54" letter-spacing="-3">MC</text></svg></div>`
 }</div><div class="meta"><strong>Michael Chen</strong><small>Bandung, ID</small></div></div>`;
-const hint = `<div class="card hint" data-i="1"><div class="shot"><div>
+const hint = n => `<div class="card hint"><div class="shot"><div>
   <p>Selected work <span class="arrow">→</span></p>
   <div class="keys" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd></div>
   <div class="swipe">Scroll, drag, or use the arrow keys</div></div></div>
-  <div class="meta"><strong>${WORKS.length} projects</strong><small>2023–now</small></div></div>`;
-const works = WORKS.map((w, k) => {
-  const link = !!w.url, i = k + 2;
+  <div class="meta"><strong>${n} projects</strong><small>2023–now</small></div></div>`;
+const card = w => {
+  const k = WORKS.indexOf(w), link = !!w.url, cat = CATS[w.cat] || {label:'', c:'#888'};
   const src = w.thumb || (link ? `https://s0.wp.com/mshots/v1/${encodeURIComponent(w.url)}?w=1000&h=1250` : '');
+  const media = w.video
+    ? `<video src="${esc(w.video)}" ${w.thumb ? `poster="${esc(w.thumb)}"` : ''} muted loop playsinline preload="none" onerror="this.remove()"></video>`
+    : src ? `<img src="${esc(src)}" alt="" loading="lazy" draggable="false" onerror="this.remove()" onload="if(this.naturalWidth<420)this.remove()">` : '';
   const open = link ? `<a class="card link" href="${esc(w.url)}" target="_blank" rel="noopener"` : `<div class="card"`;
-  return `${open} data-i="${i}" aria-label="${esc(w.title)}${link ? ', opens ' + esc(host(w.url)) : ''}">
-    <div class="shot">${gen(w, k)}${src ? `<img src="${esc(src)}" alt="" loading="lazy" draggable="false" onerror="this.remove()" onload="if(this.naturalWidth<420)this.remove()">` : ''}</div>
+  return `${open} aria-label="${esc(w.title)}${link ? ', opens ' + esc(host(w.url)) : ''}">
+    <div class="shot">${gen(w, k)}${media}</div>
+    ${cat.label ? `<span class="badge" style="--c:${cat.c}"><i></i>${esc(cat.label)}</span>` : ''}
     <span class="open" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
     <div class="meta"><strong>${esc(w.title)}</strong><small>${esc(w.tag || host(w.url))}</small></div>${link ? '</a>' : '</div>'}`;
+};
+
+/* ---- filter chips + list (tree) view ---- */
+let active = 'all', cards = [], N = 0, names = [], shown = [];
+const used = Object.keys(CATS).filter(c => WORKS.some(w => w.cat === c));
+const filters = $('filters'), index = $('index');
+filters.innerHTML =
+  `<button class="chip" data-cat="all" aria-pressed="true">All <small>${WORKS.length}</small></button>` +
+  used.map(c => `<button class="chip" data-cat="${c}" aria-pressed="false" style="--c:${CATS[c].c}"><i></i>${esc(CATS[c].label)} <small>${WORKS.filter(w => w.cat === c).length}</small></button>`).join('') +
+  `<button class="chip view" id="view" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 5h4M4 12h4M4 19h4M11 5h9M11 12h9M11 19h9"/></svg>List</button>`;
+index.innerHTML = used.map(c => {
+  const ws = WORKS.filter(w => w.cat === c);
+  return `<section class="grp" style="--c:${CATS[c].c}"><h2><i></i>${esc(CATS[c].label)} <small>${ws.length}</small></h2><ul>${
+    ws.map(w => `<li><button data-k="${WORKS.indexOf(w)}">${esc(w.title)}${w.video ? ' <span class="vid" title="Video"></span>' : ''} <small>${esc([w.tag, w.year].filter(Boolean).join(' · '))}</small></button>${
+      w.url ? `<a href="${esc(w.url)}" target="_blank" rel="noopener" aria-label="Open ${esc(w.title)}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></a>` : ''}</li>`).join('')
+  }</ul></section>`;
 }).join('');
-rail.innerHTML = photo + hint + works;
-const cards = [...rail.children], N = cards.length;
-const names = ['Michael Chen', 'How to browse', ...WORKS.map(w => w.title)];
+
+function build(cat, focus) {
+  active = cat;
+  shown = cat === 'all' ? WORKS : WORKS.filter(w => w.cat === cat);
+  const lead = cat === 'all' ? [photo, hint(WORKS.length)] : [];
+  rail.innerHTML = lead.join('') + shown.map(card).join('');
+  cards = [...rail.children]; N = cards.length; center = -1;
+  cards.forEach((c, i) => { c.dataset.i = i; const v = c.querySelector('video'); if (v) v.muted = true; });
+  names = [...(cat === 'all' ? ['Michael Chen', 'How to browse'] : []), ...shown.map(w => w.title)];
+  for (const b of filters.querySelectorAll('[data-cat]')) b.setAttribute('aria-pressed', b.dataset.cat === cat);
+  const start = focus != null ? lead.length + shown.indexOf(focus) : (cat === 'all' ? 1 : 0);
+  pos = Math.min(N - 1, start + 2.5); tgt = clamp(start, 0, N - 1); vel = 0;
+  layout(); kick();
+}
+function showIndex(on) {
+  index.classList.toggle('on', on); index.setAttribute('aria-hidden', !on);
+  $('view').setAttribute('aria-pressed', on);
+  if (on) index.querySelector('button')?.focus({preventScroll:true});
+}
+filters.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.id === 'view') return showIndex(!index.classList.contains('on'));
+  showIndex(false); if (b.dataset.cat !== active) build(b.dataset.cat);
+});
+index.addEventListener('click', e => {
+  const b = e.target.closest('button[data-k]'); if (!b) return;
+  const w = WORKS[+b.dataset.k]; showIndex(false); build(w.cat, w);
+});
 
 /* ---- motion: spring, runs only while moving ---- */
-let pos = 3.2, tgt = 0, vel = 0, center = -1, running = false, dragging = false;
+let pos = 0, tgt = 0, vel = 0, center = -1, running = false, dragging = false;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const go = i => { tgt = clamp(Math.round(i), 0, N - 1); kick(); };
 function layout() {
@@ -324,14 +424,16 @@ function layout() {
     el.style.zIndex = 1000 - Math.round(a * 10);
     el.style.opacity = a > 5.5 ? 0 : 1 - Math.max(0, a - 3.5) * .5;
     el.classList.toggle('far', a > 2.2);
+    const v = el.querySelector('video');
+    if (v) { const want = a < 1.6; if (want && v.paused) v.play().catch(() => {}); else if (!want && !v.paused) v.pause(); }
   }
   const c = clamp(Math.round(pos), 0, N - 1);
   if (c !== center) {
     cards[center]?.classList.remove('center'); cards[c].classList.add('center'); center = c;
     $('count').textContent = `${c + 1} of ${N}`; $('now').textContent = names[c];
   }
-  $('bar').style.transform = `scaleX(${clamp(pos / (N - 1), 0, 1).toFixed(4)})`;
-  stage.style.setProperty('--gx', (pos / (N - 1) - .5).toFixed(3));
+  $('bar').style.transform = `scaleX(${clamp(pos / Math.max(1, N - 1), 0, 1).toFixed(4)})`;
+  stage.style.setProperty('--gx', (pos / Math.max(1, N - 1) - .5).toFixed(3));
 }
 function tick() {
   if (!dragging) { vel += (tgt - pos) * .08; vel *= .75; pos += vel; }
@@ -391,6 +493,7 @@ rail.addEventListener('click', e => {
 addEventListener('keydown', e => {
   if (e.target.closest?.('input,textarea') || e.metaKey || e.ctrlKey) return;
   const k = e.key, onStage = document.activeElement === stage;
+  if (index.classList.contains('on')) { if (k === 'Escape') { showIndex(false); stage.focus(); } return; }
   if (k === 'ArrowRight' || (k === 'ArrowDown' && onStage)) { e.preventDefault(); go(tgt + 1); }
   else if (k === 'ArrowLeft' || (k === 'ArrowUp' && onStage)) { e.preventDefault(); go(tgt - 1); }
   else if (k === 'Home') go(0); else if (k === 'End') go(N - 1);
@@ -401,8 +504,8 @@ $('next').onclick = () => go(tgt + 1);
 addEventListener('resize', () => { layout(); }, {passive:true});
 
 /* intro: cards sweep in to the photo, then glide to the hint */
-layout(); kick();
-setTimeout(() => { if (tgt === 0) go(1); }, 2200);
+build('all'); pos = 3.2; tgt = 0; kick();
+setTimeout(() => { if (active === 'all' && tgt === 0) go(1); }, 2200);
 }
 </script>
 </body>
